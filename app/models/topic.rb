@@ -1,0 +1,22 @@
+class Topic < ApplicationRecord
+  validates :user_id, presence: true
+  validates :descliption, presence: true
+  validates :image, presence: true
+
+  belongs_to :users
+
+  mount_uploader :image, ImageUploader
+
+  has_many :favorites
+  has_many :favorites_users, through: :favorites, source: 'user'
+end
+
+class User < ApplicationRecord
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+
+  has_secure_password
+
+  has_many :topics
+end
