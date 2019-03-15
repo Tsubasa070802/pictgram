@@ -5,18 +5,10 @@ class Topic < ApplicationRecord
 
   belongs_to :users
 
+  has_many :topics
+
   mount_uploader :image, ImageUploader
 
   has_many :favorites
   has_many :favorites_users, through: :favorites, source: 'user'
-end
-
-class User < ApplicationRecord
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true
-
-  has_secure_password
-
-  has_many :topics
 end
